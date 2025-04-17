@@ -1,0 +1,49 @@
+{
+    "pizzas": [
+      {
+        "name": "Margaretha",
+        "price": "8€",
+        "description": "Tomaattikastike, mozzarella, basilika"
+      },
+      {
+        "name": "Salami",
+        "price": "8€",
+        "description": "Tomaattikastike, mozzarella, tulinen salami"
+      },
+      {
+        "name": "SMB",
+        "price": "8€",
+        "description": "Tomaattikastike, mozzarella, salami, basilika, mustapippuri"
+      },
+      {
+        "name": "Meat lover",
+        "price": "9€",
+        "description": "Tomaattikastike, mozzarella, kinkku, salami, pekoni"
+      },
+      {
+        "name": "Hawai",
+        "price": "9€",
+        "description": "Tomaattikastike, mozzarella, kinkku, ananas"
+      },
+      {
+        "name": "Marine",
+        "price": "10€",
+        "description": "Tomaattikastike, mozzarella, tonnikala, punasipuli, kapris"
+      },
+      {
+        "name": "Captain's special",
+        "price": "12€",
+        "description": "Kermapohja, mozzarella, katkarapu, valkosipuli, rucola"
+      },
+      {
+        "name": "Fino",
+        "price": "15€",
+        "description": "Kermapohja, burrata, parmankinkku, paahdettu artisokka, rucola"
+      },
+      {
+        "name": "Fantasia",
+        "price": "8€",
+        "description": "Fantasiaan kuuluu 2 omavalintaista täytettä, sittemmin hinta lisääntyy (+2€ / täyte)"
+      }
+    ]
+  }

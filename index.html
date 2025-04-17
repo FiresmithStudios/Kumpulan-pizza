@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kumpula's Pizza</title>
+
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body id="body">
+  <nav>
+    <div id="logo">
+      <img src="/static/logo.png" alt="Kumpula's Pizza Logo" />
+      <h3>Kumpulan pizza</h3>
+    </div>
+    <div>
+      <a href="#menu">Menu</a>
+      <a href="#order">Varaa</a>
+      <a href="#about">Lisää meistä</a>
+    </div>
+  </nav>
+
+  <main>
+    <header>
+      <div id="content">
+        <div class="fade-in">
+          <h1>Kumpulan pizza</h1>
+          <h2>Herkullisia lättyjä suoraan kosken viereltä 🍕</h2>
+        </div>
+        <div class="fade-in">
+          <h2 style="text-shadow: -1px 1px 3px black;">Mitä etsit?</h2>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
+            <a href="#order" id="btn">Varaa pizzasi</a>
+            <a href="#menu" id="btn">Katso mitä on tarjolla</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="order" class="fade-in">
+      <h1>Varaa paikkasi nyt!</h1>
+      <h3>
+        Olemme pieni pizzeria ja toimimme POP-Up yrityksenä pienellä kylällä Nurmijärvellä.
+        Helppouden vuoksi päätimme käyttää Google kalenterin tarjoamaa ominaisuutta...
+      </h3>
+
+      <div id="bookingBTN">
+        <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+        <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+        <script defer>
+          (function () {
+            var target = document.currentScript;
+            window.addEventListener('load', function () {
+              calendar.schedulingButton.load({
+                url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ23KKM6acEVEuxbmTDUEEcqanzqh-RDb7dGSnHg4Y0xiSmmtLaEu0NvtLYGN4wuqTUGadtiRPjF?gv=true',
+                color: '#3F51B5',
+                label: "Suorita ajan varaus",
+                target,
+              });
+            });
+          })();
+        </script>
+      </div>
+    </section>
+
+    <section id="about" class="fade-in">
+      <h1>Meistä</h1>
+      <h3>
+        Kumpulan Pizza on intohimosta syntynyt kesäinen pop-up-ravintola idyllisellä Nukarin kylällä...
+      </h3>
+    </section>
+
+    <section id="menu">
+      <h1>Menu</h1>
+      <h3>Tässä Kumpulan pizzapajan kesäklassikot – tehty rakkaudella ja kiviuunilla.</h3>
+      <div class="menu-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <a href="https://maps.app.goo.gl/vz1zLx3jrzpcjLy66" target="_blank">📍 Nukarintie 81</a>
+    </div>
+    <p style="align-self: flex-end;">&copy; Arttu Väisänen 2025</p>
+    <div class="social-links">
+      <a href="https://instagram.com" target="_blank">🔗 Instagram</a>
+      <a href="https://facebook.com" target="_blank">🔗 Facebook</a>
+      <a href="tel:+358401234567">📱 +358 40 123 4567</a>
+    </div>
+  </footer>
+
+  <div id="startup">
+    <img src="/static/logo.png" class="fade-in" alt="">
+    <h1 class="fade-in">Kumpulan Pizza</h1>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      // Smooth scroll linkeille
+      $("a").on("click", function (event) {
+        if (this.hash !== "") {
+          event.preventDefault();
+          var hash = this.hash;
+          $("html, body").animate({
+            scrollTop: $(hash).offset().top,
+          }, 500, function () {
+            window.location.hash = hash;
+          });
+        }
+      });
+
+      // Fade-in scrollatessa
+      $(window).on("scroll", function () {
+        $("section").each(function () {
+          if (
+            $(this).offset().top - $(window).scrollTop() <
+            $(window).height() / 1.2
+          ) {
+            $(this).addClass("visible");
+          }
+        });
+      });
+
+      // Startup animaatio
+      const startup = document.getElementById("startup");
+      function showStartup() {
+        window.scrollTo({ top: 0, behavior: "auto" });
+        document.body.style.overflow = "hidden";
+        document.body.style.height = "100vh";
+        startup.classList.remove("invisible");
+
+        setTimeout(() => {
+          startup.classList.add("invisible");
+          document.body.style.overflow = "auto";
+          document.body.style.height = "auto";
+        }, 2000);
+        setTimeout(() => {
+          startup.style.display = "none";
+        }, 3000);
+      }
+      showStartup();
+
+      const menuGrid = $(".menu-grid");
+  menuGrid.empty(); // Tyhjennetään mahdolliset kovakoodatut kortit
+
+  $.ajax({
+    url: "https://api.jsonbin.io/v3/b/6800c1428a456b79668b3eae",
+    method: "GET",
+    headers: {
+      "X-Master-Key": "$2b$10$FoWfn7vL3zL6mRw9Swet7Oy98RIArVdpYvjBucYkOlTb3cXVtxXG6"
+    },
+    success: function (response) {
+      const pizzas = response.record.pizzas; // HUOM: Muutettu tästä!
+      
+      pizzas.forEach(pizza => {
+        const card = $(`
+          <div class="pizza-card">
+            <h2>${pizza.name} – ${pizza.price}</h2>
+            <p>${pizza.description}</p>
+          </div>
+        `);
+        menuGrid.append(card);
+      });
+    },
+    error: function (xhr, status, error) {
+      console.error("Pizzojen haku epäonnistui:", error);
+      menuGrid.append(`<p>Valitettavasti emme saa ladattua menua juuri nyt 😢</p>`);
+    }
+  });
+    });
+  </script>
+</body>
+</html>
