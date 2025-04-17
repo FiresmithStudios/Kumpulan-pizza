@@ -150,14 +150,12 @@
   menuGrid.empty(); // Tyhjennetään mahdolliset kovakoodatut kortit
 
   $.ajax({
-    url: "https://api.jsonbin.io/v3/b/6800c1428a456b79668b3eae",
+    url: "https://raw.githubusercontent.com/FiresmithStudios/Kumpulan-pizza/main/data.json",
     method: "GET",
-    headers: {
-      "X-Master-Key": "$2b$10$FoWfn7vL3zL6mRw9Swet7Oy98RIArVdpYvjBucYkOlTb3cXVtxXG6"
-    },
+    dataType: "json", // Tämä kertoo että odotetaan JSON:ia
     success: function (response) {
-      const pizzas = response.record.pizzas; // HUOM: Muutettu tästä!
-      
+      const pizzas = response.pizzas; // EI enää .record
+
       pizzas.forEach(pizza => {
         const card = $(`
           <div class="pizza-card">
@@ -173,7 +171,7 @@
       menuGrid.append(`<p>Valitettavasti emme saa ladattua menua juuri nyt 😢</p>`);
     }
   });
-    });
+});
   </script>
 </body>
 </html>
